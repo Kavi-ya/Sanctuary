@@ -1,0 +1,588 @@
+/* --- RESET & BASE --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+    --color-bg: #0a0f0d;
+    --color-text: #e0e0e0;
+    --color-accent: #d4af37;
+    --color-green: #1b3a28;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    mix-blend-mode: difference;
+}
+
+.logo {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -5px;
+    left: 0;
+    background: var(--color-accent);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- PARALLAX HERO SECTION --- */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 115%;
+    object-fit: cover;
+    pointer-events: none;
+    will-change: transform;
+}
+
+#layer-bg {
+    z-index: 1;
+    transform-origin: bottom;
+}
+
+#layer-mid {
+    z-index: 2;
+    height: 120%;
+    top: 10%;
+}
+
+/* Updated: Moved Text Z-Index higher than Foreground */
+.hero-text {
+    position: relative;
+    z-index: 10;
+    /* Changed from 3 to 10 to sit ON TOP of foreground */
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+    /* Added text shadow for better readability against any background */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+}
+
+#layer-front {
+    z-index: 4;
+    height: 110%;
+    top: 5%;
+}
+
+/* SVG Stroke Animation */
+.hero-svg {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+}
+
+.hero-svg text {
+    fill: transparent;
+    stroke: #ffffff;
+    stroke-width: 3;
+    /* Increased from 2.5 for visibility */
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 3s ease-in-out forwards, fillText 0.5s ease-in-out 2.5s forwards;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.9));
+    /* Darker shadow for contrast */
+}
+
+.hero-svg .subtitle-text {
+    stroke: var(--color-accent);
+    fill: var(--color-accent);
+    stroke-width: 2;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw 2s ease-in-out 0.5s forwards;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 1));
+}
+
+.hero-svg .main-text {
+    font-size: 170px;
+    /* Increased from 120px to 170px */
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.hero-svg .second-line {
+    /* OVERRIDE: Removed fillText animation so it stays transparent */
+    animation: draw 3s ease-in-out forwards;
+    animation-delay: 1s;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 1);
+    /* Heavy shadow */
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillText {
+    to {
+        fill: #ffffff;
+    }
+}
+
+/* --- SCROLL REVEAL SECTIONS --- */
+section {
+    padding: 8rem 10%;
+    position: relative;
+    z-index: 5;
+    background: var(--color-bg);
+    overflow: hidden;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- PARALLAX DIVIDER --- */
+.parallax-window {
+    height: 60vh;
+    position: relative;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-window::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.window-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+}
+
+.window-content h2 {
+    font-size: 4rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/* --- VIDEO SECTION --- */
+.video-section {
+    padding: 0;
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+}
+
+.video-section video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    filter: brightness(0.7);
+}
+
+.video-overlay {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.video-content {
+    text-align: center;
+    color: #fff;
+}
+
+.video-content h2 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.video-content p {
+    font-size: 1.5rem;
+    color: var(--color-accent);
+    letter-spacing: 2px;
+}
+
+/* --- FLOATING ELEMENTS --- */
+.floater {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- ABOUT SECTION --- */
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.intro-text h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--color-accent);
+}
+
+.intro-text p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #aaa;
+}
+
+.stat-box {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat h3 {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.stat span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.intro-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.intro-img-wrapper img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s;
+}
+
+.intro-img-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+/* --- HORIZONTAL SCROLL GALLERY --- */
+.gallery-section {
+    padding: 4rem 0;
+    overflow: hidden;
+    background: #0d1210;
+}
+
+.gallery-title {
+    padding-left: 10%;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.gallery-wrapper {
+    position: relative;
+    padding: 0 5%;
+    /* Ensure the wrapper creates a context for z-index */
+    z-index: 1;
+}
+
+/* NAVIGATION BUTTON FIXES */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    /* Reduced slightly for better fit */
+    height: 80px;
+    background: rgba(212, 175, 55, 0.95);
+    border: 3px solid var(--color-accent);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 200;
+    /* Ensure this is extremely high */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    pointer-events: auto;
+    /* Force clickable */
+}
+
+.slider-btn:hover {
+    background: var(--color-accent);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 15px 60px rgba(212, 175, 55, 0.9), 0 0 30px rgba(212, 175, 55, 0.6);
+}
+
+.slider-btn:active {
+    transform: translateY(-50%) scale(1.0);
+}
+
+.slider-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: #000;
+}
+
+.slider-btn.prev {
+    left: 2%;
+}
+
+.slider-btn.next {
+    right: 2%;
+}
+
+.slider-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #333;
+    border-color: #555;
+    box-shadow: none;
+}
+
+.gallery-container {
+    display: flex;
+    gap: 2rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    padding-bottom: 2rem;
+    position: relative;
+    z-index: 50;
+    /* Lower than buttons (200) but higher than background */
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+.animal-card {
+    min-width: 300px;
+    height: 450px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.animal-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+}
+
+.animal-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.animal-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    transform: translateY(20px);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.animal-card:hover .card-info {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.card-info h3 {
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.card-info p {
+    font-size: 0.9rem;
+    color: var(--color-accent);
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #050807;
+    padding: 4rem 10%;
+    text-align: center;
+    border-top: 1px solid #222;
+    position: relative;
+    z-index: 10;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-accent);
+    transition: left 0.3s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 0;
+}
+
+.btn:hover {
+    color: #000;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero-svg .main-text {
+        font-size: 100px;
+        /* Increased from 50px */
+    }
+
+    .hero-svg .subtitle-text {
+        font-size: 24px !important;
+        /* Increased from 16px */
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-box {
+        justify-content: space-around;
+    }
+
+    .parallax-window h2 {
+        font-size: 2.5rem;
+    }
+
+    .video-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .slider-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .slider-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}

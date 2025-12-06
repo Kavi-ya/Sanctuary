@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wild | Interactive Sanctuary</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">WILD.IO</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#animals">Animals</a>
+            <a href="#visit">Visit</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION WITH MULTI-LAYER PARALLAX -->
+    <div class="hero">
+        <img src="./Assets/Background.jpeg" class="parallax-layer" id="layer-bg" alt="Background"
+            style="filter: brightness(0.6);">
+
+        <img src="./Assets/Middle Ground.jpeg" class="parallax-layer" id="layer-mid" alt="Middle Ground"
+            style="mask-image: linear-gradient(to top, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%); filter: brightness(0.7);">
+
+        <!-- VISIBILITY FIX: Moved hero-text ABOVE layers visually but updated Z-index in CSS -->
+        <div class="hero-text">
+            <!-- Increased viewBox height from 350 to 460 to fit massive text -->
+            <svg viewBox="0 0 900 460" class="hero-svg">
+                <!-- Subtitle -->
+                <text x="50%" y="50" text-anchor="middle" class="subtitle-text"
+                    style="font-size: 40px; letter-spacing: 5px; text-transform: uppercase;">
+                    Sanctuary & Conservation
+                </text>
+
+                <!-- Main Title Line 1 -->
+                <text x="50%" y="220" text-anchor="middle" class="main-text">
+                    Into the
+                </text>
+
+                <!-- Main Title Line 2 with stroke animation (removed typing effect) -->
+                <text x="50%" y="410" text-anchor="middle" class="main-text second-line">
+                    Wonders
+                </text>
+            </svg>
+        </div>
+
+        <img src="./Assets/Foreground.jpeg" class="parallax-layer" id="layer-front" alt="Foreground"
+            style="opacity: 0.9; mask-image: linear-gradient(to top, black 50%, transparent 100%); -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);">
+    </div>
+
+    <!-- CONTENT SECTION -->
+    <section id="about">
+        <div class="floater" data-speed="0.2"
+            style="top: 10%; right: 5%; width: 100px; height: 100px; background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);">
+        </div>
+        <div class="floater" data-speed="-0.1"
+            style="bottom: 20%; left: 0%; font-size: 10rem; color: var(--color-green);">🌿</div>
+
+        <div class="intro-grid reveal">
+            <div class="intro-text">
+                <h2>Protecting Nature's Giants</h2>
+                <p>We are a dedicated team of conservationists working to preserve the natural habitats of the world's
+                    most endangered species. From the dense jungles of the Amazon to the savannas of Africa, our mission
+                    is simple: Protect. Preserve. Prosper.</p>
+                <p>Our sanctuary provides a safe haven for animals rescued from illegal trade and habitat destruction.
+                </p>
+
+                <div class="stat-box">
+                    <div class="stat">
+                        <h3>150+</h3>
+                        <span>Species Protected</span>
+                    </div>
+                    <div class="stat">
+                        <h3>2.5k</h3>
+                        <span>Acres Preserved</span>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-img-wrapper">
+                <img src="./Assets/Leopard.jpeg" alt="Leopard">
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX WINDOW 1 -->
+    <div class="parallax-window" style="background-image: url('./Assets/Section Background 1.jpeg');">
+        <div class="window-content reveal">
+            <h2>The Jungle Awaits</h2>
+        </div>
+    </div>
+
+    <!-- VIDEO SECTION -->
+    <section class="video-section">
+        <video autoplay muted loop playsinline>
+            <source src="./Assets/Whisk.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay">
+            <div class="video-content reveal">
+                <h2>Experience The Wild</h2>
+                <p>A Sanctuary Like No Other</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY WITH SLIDER -->
+    <section class="gallery-section" id="animals">
+        <div class="floater" data-speed="0.1"
+            style="top: 10%; left: 40%; width: 200px; height: 200px; background: radial-gradient(circle, #1b3a28 0%, transparent 70%); opacity: 0.3;">
+        </div>
+
+        <h2 class="gallery-title reveal">Our Residents</h2>
+
+        <div class="gallery-wrapper">
+            <!-- CLICK FIX: Buttons z-index increased -->
+            <button class="slider-btn prev" id="prevBtn" aria-label="Previous">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+
+            <button class="slider-btn next" id="nextBtn" aria-label="Next">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                </svg>
+            </button>
+
+            <div class="gallery-container reveal" id="galleryContainer">
+                <div class="animal-card">
+                    <img src="./Assets/Leopard.jpeg" alt="Leopard">
+                    <div class="card-info">
+                        <h3>The Leopard</h3>
+                        <p>Vulnerable • Africa & Asia</p>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <img src="./Assets/Elephant.jpeg" alt="Elephant">
+                    <div class="card-info">
+                        <h3>African Elephant</h3>
+                        <p>Vulnerable • Africa</p>
+                    </div>
+                </div>
+                <div class="animal-card">
+                    <img src="./Assets/Macaw.jpeg" alt="Macaw">
+                    <div class="card-info">
+                        <h3>Scarlet Macaw</h3>
+                        <p>Least Concern • S. America</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX WINDOW 2 -->
+    <div class="parallax-window" style="background-image: url('./Assets/Section Background 2.jpeg');">
+        <div class="window-content reveal">
+            <h2>Conservation in Action</h2>
+        </div>
+    </div>
+
+    <section id="visit" style="text-align: center; padding-bottom: 8rem;">
+        <h2 class="reveal">Join the Movement</h2>
+        <p class="reveal" style="max-width: 600px; margin: 1rem auto; color: #aaa;">Your donation goes directly to food,
+            medical care, and habitat restoration for our residents.</p>
+        <a href="#" class="btn reveal">Donate Now</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Wild.io Sanctuary. All rights reserved.</p>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
